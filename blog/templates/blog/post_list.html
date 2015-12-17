@@ -1,39 +1,13 @@
-<html>
-  <head>
-    <title>My Blog</title>
-  </head>
-  <body>
-    <div>
-      <h1><a ref="">Padmini's Django Blog</a>,</h1>
-    </div>
+{% extends "blog/base.html" %}
 
-    {% for post in posts %}
-      <div>
-        <p>published: {{ post.published_date }}</p>
-        <h1><a href="">{{ post.title }}</a></h1>
-        <p>{{ post.text|linebreaks }}</p>
+{% block content %}
+  {% for post in posts %}
+    <div class="post">
+      <div class="date">
+        {{ post.published_date }}
       </div>
-    {% endfor %}
-
-    <div>
-      <p>published: 23.9.2015, 10:10</p>
-      <h2><a href="">My first post</a></h2>
-      <p> Recipe for <strong>Penda:</strong>,</p>
-      <p></p>
-      <p> 1 carton double cream, 1/2 carton sugar, 2 cartons milk powder, elchi, kesar. </p>
+      <h1><a href="{% url "post_detail" pk=post.pk %}">{{ post.title }}</a></h1>
+      <p>{{ post.text|linebreaks }}</p>
     </div>
-
-    <div>
-      <p>published: 23.9.2015, 10:20</p>
-      <h2><a href="">My second post</a></h2>
-      <p> Recipe for <em>Barfi:</em></P>
-      <ul>
-        <li>1/2 can evaporated cream</li>
-        <li>1 lb milk powder</li>
-        <li>8oz sugar</li>
-        <li>glass of water</li>
-      </ul>
-    </div>
-
-  </body>
-</html>
+  {% endfor %}
+{% endblock content %}
